@@ -7,7 +7,7 @@ def test_dark_theme_by_time():
     """
     current_time = time(hour=23)
     # TODO переключите темную тему в зависимости от времени суток (с 22 до 6 часов утра - ночь)
-    is_dark_theme = current_time.hour >= 22 or current_time < 6
+    is_dark_theme = current_time.hour >= 22 or current_time.hour < 6
     assert is_dark_theme is True
 
 def test_dark_theme_by_time_and_user_choice():
@@ -20,9 +20,11 @@ def test_dark_theme_by_time_and_user_choice():
     """
     current_time = time(hour=16)
     dark_theme_enabled_by_user = True
-    # TODO переключите темную тему в зависимости от времени суток,
-    #  но учтите что темная тема может быть включена вручную
-    is_dark_theme = None
+    # TODO переключите темную тему в зависимости от времени суток, но учтите что темная тема может быть включена вручную
+    if dark_theme_enabled_by_user is not None:
+        is_dark_theme = dark_theme_enabled_by_user
+    else:
+        is_dark_theme = current_time.hour >= 22 or current_time.hour < 6
     assert is_dark_theme is True
 
 def test_find_suitable_user():
@@ -38,11 +40,11 @@ def test_find_suitable_user():
     ]
 
     # TODO найдите пользователя с именем "Olga"
-    suitable_users = list(filter(lambda user: user['name'] == "Olga", users))
+    suitable_users = None
     assert suitable_users == {"name": "Olga", "age": 45}
 
     # TODO найдите всех пользователей младше 20 лет
-    suitable_users = None
+    suitable_users = list(filter(lambda user: user['age'] == "age < 20", users))
     assert suitable_users == [
         {"name": "Stanislav", "age": 15},
         {"name": "Maria", "age": 18},
