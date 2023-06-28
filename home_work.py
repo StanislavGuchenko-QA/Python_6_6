@@ -49,7 +49,7 @@ def test_find_suitable_user():
     assert olga_user == {"name": "Olga", "age": 45}
 
     # TODO найдите всех пользователей младше 20 лет
-def age_filter(user):
+def test_age_filter(user):
     if user["age"] < 20:
         return True
     else:
